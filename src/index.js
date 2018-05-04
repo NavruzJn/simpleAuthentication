@@ -6,7 +6,7 @@ const { Database } = require("./db/database");
 const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
-const db = Database();
+const db = new Database();
 
 app.use(express.static("public"));
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -20,27 +20,18 @@ app.get('/', function (req, res) {
     console.log("Welcome");
 });
 
-io.on('connection', function (socket) {
-    socket.emit('authenticate',function (socket, data, callback) {
-            const userService = new UserService(db);
-            const {username, password} = data;
-            try {
-                const user = userService.getUser(username, password);
-                console.log(user);
-                callback(null, user);
-            } catch (error) {
-                callback(error);
-            }
+require('socketio-auth')(io, {
+    authenticate: function (socket, data, callback) {
+        const userService = new UserService(db);
+        const {username, password} = data;
+        try {
+            const user = userService.getUser(username, password);
+            console.log(user);
+            callback(null, user);
+        } catch (error) {
+            callback(error);
         }
-    );
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });
+    }
 });
-
-app.post('/login', io.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login' })
-);
 
 server.listen(9000);
