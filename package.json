@@ -1,0 +1,26 @@
+{
+  "name": "simpleauthentication",
+  "version": "1.0.0",
+  "description": "Simple authentixcation",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm t"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NavruzJn/simpleAuthentication.git"
+  },
+  "author": "Navruz Jn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NavruzJn/simpleAuthentication/issues"
+  },
+  "homepage": "https://github.com/NavruzJn/simpleAuthentication#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "sequelize": "^4.37.6",
+    "socketio-auth": "^0.1.0"
+  }
+}
