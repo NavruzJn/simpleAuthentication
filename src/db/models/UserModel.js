@@ -7,14 +7,6 @@ class UserModel extends BaseModel {
   constructor(database, transaction) {
     super(USER_TABLE_NAME, database, transaction);
   }
-
-  findById(userId) {
-    return this.findOne({ user_id: userId });
-  }
-
-  setUserInvites(userId, invites) {
-    return this.update({ invite: invites }, { user_id: { $eq: userId } });
-  }
 }
 
 function initUserModel(database) {
